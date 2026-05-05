@@ -473,8 +473,9 @@ body.frescopa-theme main .user-registration form label {
   color: #58181d;
 }
 
-/* User Registration – Frescopa machine dropdown */
-body.frescopa-theme main .user-registration .frescopa-machine-field select {
+/* User Registration / Create Account – Frescopa machine dropdown */
+body.frescopa-theme main .user-registration .frescopa-machine-field select,
+body.frescopa-theme main .create-account .frescopa-machine-field select {
   width: 100%;
   padding: 14px 20px;
   border: 2px solid #c9ae75;
@@ -490,16 +491,19 @@ body.frescopa-theme main .user-registration .frescopa-machine-field select {
   cursor: pointer;
 }
 
-body.frescopa-theme main .user-registration .frescopa-machine-field select:focus {
+body.frescopa-theme main .user-registration .frescopa-machine-field select:focus,
+body.frescopa-theme main .create-account .frescopa-machine-field select:focus {
   outline: none;
   border-color: #b89450;
 }
 
-body.frescopa-theme main .user-registration .frescopa-machine-field select option:not([value=""]) {
+body.frescopa-theme main .user-registration .frescopa-machine-field select option:not([value=""]),
+body.frescopa-theme main .create-account .frescopa-machine-field select option:not([value=""]) {
   color: #333;
 }
 
-body.frescopa-theme main .user-registration .frescopa-machine-field label {
+body.frescopa-theme main .user-registration .frescopa-machine-field label,
+body.frescopa-theme main .create-account .frescopa-machine-field label {
   display: none;
 }
 

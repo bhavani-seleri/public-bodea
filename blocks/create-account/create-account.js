@@ -37,6 +37,8 @@ function clearProductObject() {
 
 function buildCreateAccountFormDef(config = {}) {
   const isLumaVariant = normalizeVariant(config.variant) === "luma";
+  const isFrescopaVariant = normalizeVariant(config.variant) === "frescopa"
+    || document.body.classList.contains('frescopa-theme');
   const showLoyaltyProgram = isTruthy(config.showloyaltyprogram);
   const shoeSizes = ["", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45"];
   const shirtSizes = ["", "s", "m", "l", "xl", "xxl"];
@@ -228,6 +230,17 @@ function buildCreateAccountFormDef(config = {}) {
             appliedCssClassNames: withConditionalClasses("col-12 luma-preference-field", isLumaVariant),
             properties: { colspan: 12 },
           },
+          ...(isFrescopaVariant ? [{
+            id: "frescopaOwner",
+            name: "frescopaOwner",
+            fieldType: "drop-down",
+            label: { value: "Do you already have a Frescopa machine?" },
+            enum: ["", "yes", "no"],
+            enumNames: ["Do you already have a Frescopa machine?", "Yes", "No"],
+            type: "string",
+            properties: { colspan: 12 },
+            appliedCssClassNames: "frescopa-machine-field",
+          }] : []),
           {
             id: "submit-btn",
             name: "submitButton",

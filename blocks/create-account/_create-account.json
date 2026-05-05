@@ -35,6 +35,10 @@
             {
               "name": "Luma",
               "value": "luma"
+            },
+            {
+              "name": "Frescopa",
+              "value": "frescopa"
             }
           ]
         },
