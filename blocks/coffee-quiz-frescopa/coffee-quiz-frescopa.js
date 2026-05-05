@@ -69,6 +69,11 @@ export default async function decorate(block) {
   const completionUrl = isAuthorEnvironment()
     ? (rawCompletionUrl.endsWith('.html') ? rawCompletionUrl : `${rawCompletionUrl}.html`)
     : rawCompletionUrl;
+
+  const rawSignInUrl = cfg['sign-in-url'] || '/en/sign-in';
+  const signInUrl = isAuthorEnvironment()
+    ? (rawSignInUrl.endsWith('.html') ? rawSignInUrl : `${rawSignInUrl}.html`)
+    : rawSignInUrl;
   const completionDelay = parseInt(cfg['completion-delay'], 10) || 0;
   const showProgress = cfg['show-progress']?.toLowerCase() !== 'false';
   const startedEvent = cfg['started-event-type'] || '';
@@ -230,6 +235,13 @@ export default async function decorate(block) {
   });
 
   submitBtn.addEventListener('click', () => {
+    const isLoggedIn = localStorage.getItem('project_user_logged_in') === 'true';
+
+    if (!isLoggedIn) {
+      window.location.assign(signInUrl);
+      return;
+    }
+
     completed = true;
     fireEvent(endedEvent);
 
