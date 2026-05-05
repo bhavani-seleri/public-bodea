@@ -208,6 +208,10 @@ export default async function decorate(block) {
     stepEl.append(grid);
     updateButtons(index);
     updateDots(index);
+
+    if (typeof window.updateDataLayer === 'function') {
+      window.updateDataLayer({ wizard: { currentStep: index + 1 } });
+    }
   }
 
   nextBtn.addEventListener('click', () => {
