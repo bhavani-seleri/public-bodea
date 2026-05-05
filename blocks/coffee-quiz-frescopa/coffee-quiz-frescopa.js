@@ -1,5 +1,6 @@
 import { readBlockConfig } from '../../scripts/aem.js';
 import { isAuthorEnvironment } from '../../scripts/scripts.js';
+import { dispatchCustomEvent } from '../../scripts/custom-events.js';
 
 // AEM DAM base path for quiz images — relative path works on author, needs
 // image-base-url prefix (e.g. AEM publish host) to work on live EDS delivery.
@@ -59,10 +60,6 @@ function buildDefaultSteps(base) {
   ];
 }
 
-function fireEvent(type) {
-  if (!type) return;
-  document.dispatchEvent(new CustomEvent(type, { bubbles: true }));
-}
 
 export default async function decorate(block) {
   const cfg = readBlockConfig(block);
@@ -93,12 +90,12 @@ export default async function decorate(block) {
 
   block.textContent = '';
 
-  fireEvent(startedEvent);
+  dispatchCustomEvent(startedEvent);
 
   if (abandonedEvent) {
     window.addEventListener('visibilitychange', () => {
       if (document.hidden && !completed && currentStepIndex < steps.length - 1) {
-        fireEvent(abandonedEvent);
+        dispatchCustomEvent(abandonedEvent);
       }
     });
   }
@@ -233,7 +230,7 @@ export default async function decorate(block) {
   nextBtn.addEventListener('click', () => {
     if (currentStepIndex < steps.length - 1) {
       currentStepIndex += 1;
-      fireEvent(stepEvent);
+      dispatchCustomEvent(stepEvent);
       renderStep(currentStepIndex);
     }
   });
@@ -248,24 +245,17 @@ export default async function decorate(block) {
   submitBtn.addEventListener('click', () => {
     const isLoggedIn = localStorage.getItem('project_user_logged_in') === 'true';
 
-    if (!isLoggedIn) {
-      window.location.assign(signInUrl);
-      return;
-    }
-
     completed = true;
-    fireEvent(endedEvent);
-
     submitBtn.textContent = 'Submitting…';
     submitBtn.disabled = true;
     backBtn.disabled = true;
 
-    if (completionUrl) {
-      setTimeout(
-        () => window.location.assign(completionUrl),
-        completionDelay || 0
-      );
-    }
+    dispatchCustomEvent(endedEvent);
+
+    setTimeout(
+      () => window.location.assign(isLoggedIn ? completionUrl : signInUrl),
+      isLoggedIn ? Math.max(1000, completionDelay || 0) : 1000
+    );
   });
 
   renderStep(0);
