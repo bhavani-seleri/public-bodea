@@ -2064,8 +2064,19 @@
           {
             "name": "Frescopa",
             "value": "frescopa"
+          },
+          {
+            "name": "WKND Fly",
+            "value": "wknd-fly"
           }
         ]
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "sign-in-redirect-url",
+        "label": "Sign-In Redirect URL",
+        "description": "URL for the 'Already have an account? Sign In' link. Defaults to 'sign-in'."
       },
       {
         "component": "boolean",

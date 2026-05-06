@@ -39,6 +39,7 @@ function buildCreateAccountFormDef(config = {}) {
   const isLumaVariant = normalizeVariant(config.variant) === "luma";
   const isFrescopaVariant = normalizeVariant(config.variant) === "frescopa"
     || document.body.classList.contains('frescopa-theme');
+  const isWkndFlyVariant = normalizeVariant(config.variant) === "wknd-fly";
   const showLoyaltyProgram = isTruthy(config.showloyaltyprogram);
   const showCommunicationPreferences = config.showcommunicationpreferences !== undefined
     ? isTruthy(config.showcommunicationpreferences)
@@ -94,6 +95,16 @@ function buildCreateAccountFormDef(config = {}) {
             autoComplete: "tel",
             properties: { colspan: isFrescopaVariant ? 6 : 12 },
           },
+          ...(isWkndFlyVariant ? [{
+            id: "wkndFlyMember",
+            name: "wkndFlyMember",
+            fieldType: "drop-down",
+            label: { value: "WKND Fly Member" },
+            enum: ["", "member", "non-member"],
+            enumNames: ["Select...", "Member", "Non-member"],
+            type: "string",
+            properties: { colspan: 12 },
+          }] : []),
           {
             id: "address",
             name: "streetAddress",
@@ -286,9 +297,10 @@ export default async function decorate(block) {
   await formModule.default(formContainer);
 
   setTimeout(() => {
-    applyButtonConfigToSubmitButton(block, config, 'form-submit');
+    applyButtonConfigToSubmitButton(block, config);
     prePopulateFormFromDataLayer(block);
-    attachCreateAccountSubmitHandler(block, config.redirecturl);
+    attachCreateAccountSubmitHandler(block, config);
+    addSignInLink(block, config);
     const form = block.querySelector("form");
     if (form) {
       syncFormDataLayer(form, DEFAULT_FORM_FIELD_MAP);
@@ -303,9 +315,29 @@ export default async function decorate(block) {
   }, 100);
 }
 
-function attachCreateAccountSubmitHandler(block, redirectUrl) {
+function addSignInLink(block, config) {
   const form = block.querySelector("form");
   if (!form) return;
+  const wrapper = form.closest(".form") || form.parentElement;
+  if (!wrapper) return;
+  if (wrapper.querySelector(".create-account-sign-in-link")) return;
+
+  const signInUrl = normalizeAemPath(config['sign-in-redirect-url']) || 'sign-in';
+  const signInDiv = document.createElement("div");
+  signInDiv.className = "create-account-sign-in-link";
+  const signInAnchor = document.createElement("a");
+  signInAnchor.href = signInUrl;
+  signInAnchor.textContent = "Sign In";
+  signInDiv.append(document.createTextNode("Already have an account? "), signInAnchor);
+  wrapper.appendChild(signInDiv);
+}
+
+function attachCreateAccountSubmitHandler(block, config) {
+  const form = block.querySelector("form");
+  if (!form) return;
+
+  const redirectUrl = config.redirecturl;
+  const isWkndFlyVariant = normalizeVariant(config.variant) === "wknd-fly";
 
   form.addEventListener(
     "submit",
@@ -313,7 +345,6 @@ function attachCreateAccountSubmitHandler(block, redirectUrl) {
       event.preventDefault();
 
       const formData = {};
-
       const allFields = form.querySelectorAll("input, select, textarea");
       allFields.forEach((field) => {
         const fieldName = field.name || field.id;
@@ -392,6 +423,24 @@ function attachCreateAccountSubmitHandler(block, redirectUrl) {
           window.dataLayer.createAccountConsent = true;
         }
 
+        if (isWkndFlyVariant && typeof window.updateDataLayer === "function") {
+          const isMember = (formData.wkndFlyMember || "").toLowerCase() === "member" ? "y" : "n";
+          window.updateDataLayer({
+            person: {
+              wkndFlyMember: formData.wkndFlyMember || "",
+              isMember: isMember === "y",
+            },
+            _demosystem4: {
+              identification: {
+                core: {
+                  email: formData.email || null,
+                  isMember,
+                },
+              },
+            },
+          });
+        }
+
         syncFormDataLayer(form, DEFAULT_FORM_FIELD_MAP);
         clearProductObject();
 
@@ -399,7 +448,7 @@ function attachCreateAccountSubmitHandler(block, redirectUrl) {
         const authoredEventType = submitBtn?.dataset?.buttonEventType?.trim();
         if (authoredEventType) dispatchCustomEvent(authoredEventType);
 
-        showSuccessMessage(form, "Account created successfully! Redirecting to sign-in...");
+        showSuccessMessage(form, "Account created successfully! Redirecting...");
 
         const redirectTo = normalizeAemPath(redirectUrl);
         if (redirectTo) setTimeout(() => { window.location.href = redirectTo; }, 2000);
