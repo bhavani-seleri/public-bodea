@@ -78,6 +78,10 @@
         {
             "name": "Frescopa Theme",
             "value": "frescopa-theme"
+          },
+          {
+            "name": "Carvelo Theme",
+            "value": "carvelo-theme"
           }
         ]
       },
