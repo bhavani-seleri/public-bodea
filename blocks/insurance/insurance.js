@@ -5,18 +5,7 @@
  * Uses same adaptive form runtime as application-form.
  */
 
-import { readBlockConfig, loadCSS, toClassName } from '../../scripts/aem.js';
-
-/** Read config: UE structure (data-aue-prop) or table (readBlockConfig). */
-function readConfigFromBlock(blockOrContainer) {
-  const el = blockOrContainer;
-  const titleEl = el.querySelector('[data-aue-prop="title"]');
-  if (titleEl) {
-    return { title: (titleEl.textContent ?? '').trim() || 'Life Insurance' };
-  }
-  const cfg = readBlockConfig(el) || {};
-  return { title: (cfg.title ?? 'Life Insurance').toString().trim() };
-}
+import { readBlockConfig, loadCSS } from '../../scripts/aem.js';
 
 function buildInsuranceFormDef(title) {
   return {
@@ -73,42 +62,10 @@ export default async function decorate(block) {
 
   block.classList.add('insurance-block');
 
-  const hasUEStructure = block.querySelector('[data-aue-prop="title"]');
-  let configContainer = null;
+  const cfg = readBlockConfig(block);
+  const title = (cfg.title ?? 'Life Insurance').toString().trim();
 
-  if (!hasUEStructure) {
-    /* Table structure: wrap rows in one container and mark data-aue-prop for UE */
-    configContainer = document.createElement('div');
-    configContainer.className = 'insurance-config';
-    configContainer.setAttribute('aria-hidden', 'true');
-    configContainer.hidden = true;
-    while (block.firstChild) {
-      configContainer.appendChild(block.firstChild);
-    }
-    block.appendChild(configContainer);
-    configContainer.querySelectorAll(':scope > div').forEach((row) => {
-      const cols = [...row.children];
-      if (cols.length >= 2 && cols[0].textContent) {
-        const prop = toClassName(cols[0].textContent);
-        if (prop) {
-          const valueCell = cols[1];
-          valueCell.setAttribute('data-aue-prop', prop);
-          const p = valueCell.querySelector('p');
-          if (p) p.setAttribute('data-aue-prop', prop);
-        }
-      }
-    });
-  } else {
-    /* UE structure: hide config divs but leave in place for UE */
-    block.querySelectorAll('[data-aue-prop]').forEach((cell) => {
-      const row = cell.closest(':scope > div');
-      if (row) row.classList.add('insurance-config-row');
-    });
-  }
-
-  const getConfigSource = () => (configContainer || block);
-  const config = readConfigFromBlock(getConfigSource());
-  const title = config.title || 'Life Insurance';
+  block.textContent = '';
 
   const formDef = buildInsuranceFormDef(title);
   const formContainer = document.createElement('div');
@@ -125,9 +82,6 @@ export default async function decorate(block) {
   await formModule.default(formContainer);
 
   setTimeout(() => {
-    const heading = formContainer.querySelector('#heading-insurance h2, [id="heading-insurance"] h2');
-    if (heading) heading.setAttribute('data-aue-prop', 'title');
-
     const form = block.querySelector('form');
     if (form) {
       form.addEventListener('submit', (e) => {

@@ -4,20 +4,7 @@
  * Variant "credit-card": Add external credit card – Type (Credit Card), Origin, Card number, Authorization / Authorized user name, Submit.
  */
 
-import { readBlockConfig, loadCSS, toClassName } from '../../scripts/aem.js';
-
-/** Read config: UE structure (data-aue-prop) or table (readBlockConfig). */
-function readConfigFromBlock(blockOrContainer) {
-  const el = blockOrContainer;
-  const variantEl = el.querySelector('[data-aue-prop="variant"]');
-  if (variantEl) {
-    const v = (variantEl.textContent ?? '').trim().toLowerCase();
-    return { variant: (v === 'credit-card' || v === 'creditcard') ? 'credit-card' : 'account' };
-  }
-  const cfg = readBlockConfig(el) || {};
-  const v = String(cfg.variant ?? cfg.form ?? 'account').trim().toLowerCase();
-  return { variant: (v === 'credit-card' || v === 'creditcard') ? 'credit-card' : 'account' };
-}
+import { readBlockConfig, loadCSS } from '../../scripts/aem.js';
 
 function buildExternalAccountFormDef() {
   return {
@@ -139,40 +126,11 @@ export default async function decorate(block) {
 
   block.classList.add('add-external-block');
 
-  const hasUEStructure = block.querySelector('[data-aue-prop="variant"]');
-  let configContainer = null;
+  const cfg = readBlockConfig(block);
+  const v = String(cfg.variant ?? 'account').trim().toLowerCase();
+  const variant = (v === 'credit-card' || v === 'creditcard') ? 'credit-card' : 'account';
 
-  if (!hasUEStructure) {
-    configContainer = document.createElement('div');
-    configContainer.className = 'add-external-config';
-    configContainer.setAttribute('aria-hidden', 'true');
-    configContainer.hidden = true;
-    while (block.firstChild) {
-      configContainer.appendChild(block.firstChild);
-    }
-    block.appendChild(configContainer);
-    configContainer.querySelectorAll(':scope > div').forEach((row) => {
-      const cols = [...row.children];
-      if (cols.length >= 2 && cols[0].textContent) {
-        const prop = toClassName(cols[0].textContent);
-        if (prop) {
-          const valueCell = cols[1];
-          valueCell.setAttribute('data-aue-prop', prop);
-          const p = valueCell.querySelector('p');
-          if (p) p.setAttribute('data-aue-prop', prop);
-        }
-      }
-    });
-  } else {
-    block.querySelectorAll('[data-aue-prop]').forEach((cell) => {
-      const row = cell.closest(':scope > div');
-      if (row) row.classList.add('add-external-config-row');
-    });
-  }
-
-  const getConfigSource = () => (configContainer || block);
-  const config = readConfigFromBlock(getConfigSource());
-  const variant = config.variant;
+  block.textContent = '';
 
   const formDef = buildFormDef(variant);
   const formContainer = document.createElement('div');
