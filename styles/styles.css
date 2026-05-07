@@ -761,6 +761,31 @@ footer .footer[data-block-status="loaded"] {
   min-height: 0;
 }
 
+/* Prevent new-account FOUC: show a loading shimmer until loaded. */
+.new-account.block[data-block-status="initialized"],
+.new-account.block[data-block-status="loading"] {
+  position: relative;
+  height: 500px;
+  min-height: 500px;
+  overflow: hidden;
+  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 37%, #f1f5f9 63%);
+  background-size: 400% 100%;
+  animation: new-arrival-loading-shimmer 1.4s ease-in-out infinite;
+}
+
+.new-account.block[data-block-status="initialized"] > *,
+.new-account.block[data-block-status="loading"] > * {
+  visibility: hidden;
+}
+
+.new-account.block[data-block-status="loaded"] {
+  background: none;
+  animation: none;
+  height: auto;
+  min-height: 0;
+  overflow: visible;
+}
+
 h1,
 h2,
 h3,
