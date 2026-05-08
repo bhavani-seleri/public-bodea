@@ -458,6 +458,12 @@ export default async function decorate(block) {
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
 
+  // Get block index for ID generation
+  const allColumnsBlocks = document.querySelectorAll('.columns');
+  const blockIndex = Array.from(allColumnsBlocks).indexOf(block);
+  
+  let contentCounter = 0;
+
   const columnWidths = parseColumnWidths(block, config);
 
   /** Action-button blocks created from live "p,p,p" pattern; decorate and load after column loop */
@@ -520,6 +526,16 @@ export default async function decorate(block) {
               buttonContainer.replaceWith(videoContainer);
             }
           }
+        }
+      }
+
+      // Check for text content (paragraphs or headings)
+      const textContent = col.querySelector('p, h1, h2, h3, h4, h5, h6');
+      if (textContent && !pic) {  // Only add if no picture (avoid double counting)
+        const textBlock = textContent.closest('div');
+        if (textBlock) {
+          textBlock.setAttribute('data-text-block-index', contentCounter);
+          contentCounter++;
         }
       }
     });
