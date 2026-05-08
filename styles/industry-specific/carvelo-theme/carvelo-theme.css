@@ -54,10 +54,13 @@ body.carvelo-theme .hero h1 {
 body.carvelo-theme h1 {
   font-size: 2.5rem !important;
 }
-
 body.carvelo-theme h2 {
-  font-size: 2rem !important;
+  font-size: 1.3rem !important;
 }
+body.carvelo-theme .hero h2 {
+    font-size: 2rem !important;
+}
+
 
 body.carvelo-theme .hero h2,
 body.carvelo-theme .hero-wrapper h2 {
@@ -72,8 +75,8 @@ body.carvelo-theme p,
 body.carvelo-theme li {
   color: #000000;
   font-family: adobe-clean, proxima-nova, "Proxima Nova", sans-serif;
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 1rem !important;
+  line-height: 1.6 !important;
 }
 
 /* ─── Buttons ────────────────────────────────────────────────────────── */
@@ -138,8 +141,7 @@ body.carvelo-theme header nav {
   max-width: 1280px !important;
   width: 100%;
   padding-left: 0;
-  padding-right: 0;
-  padding-top: 0;
+
 }
 
 body.carvelo-theme header .nav-brand,
