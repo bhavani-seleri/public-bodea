@@ -183,6 +183,100 @@ function renderHeader(container, selectedTags) {
   container.append(wrap);
 }
 
+function renderCarousel(block, items, cfg, isAuthor) {
+  const heading = coerceConfigScalar(cfg?.["heading"] || cfg?.["block-title"]);
+  const learnMoreLabel = coerceConfigScalar(cfg?.["learn-more-label"]) || "Learn more";
+
+  const carousel = document.createElement("div");
+  carousel.className = "cpl-carousel";
+
+  if (heading) {
+    const hdr = document.createElement("div");
+    hdr.className = "cpl-carousel-header";
+    const h2 = document.createElement("h2");
+    h2.textContent = heading;
+    hdr.append(h2);
+    carousel.append(hdr);
+  }
+
+  const stage = document.createElement("div");
+  stage.className = "cpl-carousel-stage";
+
+  const prevBtn = document.createElement("button");
+  prevBtn.className = "cpl-carousel-btn cpl-carousel-btn--prev";
+  prevBtn.setAttribute("aria-label", "Previous");
+  prevBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>`;
+
+  const nextBtn = document.createElement("button");
+  nextBtn.className = "cpl-carousel-btn cpl-carousel-btn--next";
+  nextBtn.setAttribute("aria-label", "Next");
+  nextBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>`;
+
+  const track = document.createElement("div");
+  track.className = "cpl-carousel-track";
+
+  items.forEach((item, i) => {
+    const { damImageURL = {} } = item || {};
+    const slide = document.createElement("div");
+    slide.className = "cpl-carousel-slide";
+    if (i === 0) slide.classList.add("active");
+
+    if (damImageURL && (damImageURL._publishUrl || damImageURL._authorUrl || damImageURL._dynamicUrl)) {
+      const picture = createLumaProductImagePicture(damImageURL, item.name || "Product image", {
+        isAuthor,
+        eager: i === 0,
+      });
+      slide.append(picture);
+    }
+    track.append(slide);
+  });
+
+  stage.append(prevBtn, track, nextBtn);
+  carousel.append(stage);
+
+  const meta = document.createElement("div");
+  meta.className = "cpl-carousel-meta";
+
+  const nameEl = document.createElement("h3");
+  nameEl.className = "cpl-carousel-name";
+  nameEl.textContent = items[0]?.name || "";
+
+  const learnMoreBtn = document.createElement("a");
+  learnMoreBtn.className = "cpl-carousel-learn-more button";
+  learnMoreBtn.textContent = learnMoreLabel;
+
+  const getProductPath = (item) => {
+    const productId = item?.sku || item?.id || "";
+    if (!productId) return "#";
+    const currentPath = window.location.pathname;
+    const basePath = currentPath.substring(0, currentPath.lastIndexOf("/"));
+    return isAuthor
+      ? `${basePath}/product.html?productId=${encodeURIComponent(productId)}`
+      : `${basePath}/product?productId=${encodeURIComponent(productId)}`;
+  };
+
+  learnMoreBtn.href = getProductPath(items[0]);
+
+  meta.append(nameEl, learnMoreBtn);
+  carousel.append(meta);
+
+  block.append(carousel);
+
+  let current = 0;
+
+  function goTo(index) {
+    const slides = track.querySelectorAll(".cpl-carousel-slide");
+    slides[current].classList.remove("active");
+    current = (index + items.length) % items.length;
+    slides[current].classList.add("active");
+    nameEl.textContent = items[current]?.name || "";
+    learnMoreBtn.href = getProductPath(items[current]);
+  }
+
+  prevBtn.addEventListener("click", () => goTo(current - 1));
+  nextBtn.addEventListener("click", () => goTo(current + 1));
+}
+
 export default async function decorate(block) {
   // Check if we're in author environment
   const isAuthor = isAuthorEnvironment();
@@ -238,6 +332,21 @@ export default async function decorate(block) {
   // Clear author table
   block.innerHTML = "";
 
+  const allItems = await fetchProducts(folderHref);
+  const items = filterByCategories(allItems, tags);
+
+  if (styleVariant === "carousel") {
+    if (!items || items.length === 0) {
+      const empty = document.createElement("p");
+      empty.className = "cpl-empty";
+      empty.textContent = "No products found.";
+      block.append(empty);
+      return;
+    }
+    renderCarousel(block, items, cfg, isAuthor);
+    return;
+  }
+
   renderHeader(block, tags);
 
   const grid = document.createElement("div");
@@ -245,8 +354,6 @@ export default async function decorate(block) {
   grid.style.setProperty("--cpl-columns", cardsPerRow);
   block.append(grid);
 
-  const allItems = await fetchProducts(folderHref);
-  const items = filterByCategories(allItems, tags);
   if (!items || items.length === 0) {
     const empty = document.createElement("p");
     empty.className = "cpl-empty";
