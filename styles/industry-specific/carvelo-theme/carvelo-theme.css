@@ -5,6 +5,7 @@ body.carvelo-theme {
   --nav-text-color: #000000;
   --footer-text-color: #ffffff;
   --light-color: #f3f2f6;
+  --dark-color: #050e13;
   --background-color: #ffffff;
   --text-color: #000000;
   --body-font-family: adobe-clean, proxima-nova, "Proxima Nova", sans-serif;
@@ -333,8 +334,13 @@ body.carvelo-theme main .form form select {
   color: #000000 !important;
   border: 1.5px solid #bcbcbc !important;
   border-radius: 10px !important;
+  padding:5px 5px;
 }
 
+body.carvelo-theme form button {
+    padding: 10px 32px !important;
+    text-align: center;
+} 
 body.carvelo-theme main .form form input:focus,
 body.carvelo-theme main .form form textarea:focus,
 body.carvelo-theme main .form form select:focus {
@@ -453,9 +459,11 @@ body.carvelo-theme main .sign-in form p {
   color: #000000;
 }
 
+
 body.carvelo-theme main .sign-in {
-  background: transparent;
-  box-shadow: none;
+    box-shadow: none;
+    background: #fff;
+    max-width: 400px;
 }
 
 body.carvelo-theme main .sign-in .create-account-link {
