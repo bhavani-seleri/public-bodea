@@ -8622,8 +8622,28 @@
           {
             "name": "No Border",
             "value": "no-border"
+          },
+          {
+            "name": "Carousel",
+            "value": "carousel"
           }
         ]
+      },
+      {
+        "component": "text",
+        "name": "heading",
+        "label": "Carousel Heading",
+        "value": "",
+        "valueType": "string",
+        "description": "Heading displayed above the carousel (e.g. 'Choose your car'). Only used in Carousel variant."
+      },
+      {
+        "component": "text",
+        "name": "learn-more-label",
+        "label": "Learn More Button Label",
+        "value": "Learn more",
+        "valueType": "string",
+        "description": "Text for the Learn more button in the Carousel variant."
       },
       {
         "component": "boolean",
@@ -8631,7 +8651,7 @@
         "label": "No Background",
         "value": "false",
         "valueType": "boolean",
-        "description": "Remove media overlay and image brightness filter when enabled."
+        "description": "Remove the media overlay and image brightness filter when toggled on."
       },
       {
         "component": "text",
