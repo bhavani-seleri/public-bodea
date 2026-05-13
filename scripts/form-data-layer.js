@@ -72,6 +72,21 @@ export function syncFormDataLayer(form, fieldMap) {
   window.updateDataLayer(updates);
 }
 
+export async function submitToWebhook(form, webhookUrl, formId) {
+  const payload = buildFormDataLayerUpdates(form, DEFAULT_FORM_FIELD_MAP) || {};
+  if (formId) payload['form-name'] = formId;
+  try {
+    await fetch(webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error('Webhook submission failed:', e);
+  }
+}
+
 export function attachLiveFormSync(form, fieldMap) {
   if (!form || !fieldMap) return;
   const handler = () => syncFormDataLayer(form, fieldMap);
