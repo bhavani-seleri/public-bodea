@@ -876,9 +876,22 @@ body.carvelo-theme .cards > ul > li {
 body.carvelo-theme .hero.block.image-background-text-left{
   padding: 0;
 }
-.hero.image-background-text-left div:nth-child(2){
+body.carvelo-theme  .hero.image-background-text-left div:nth-child(2){
     margin-left: 11.5%;
 }
-main .category-products-lister.carousel .cpl-carousel-meta {
+body.carvelo-theme main .category-products-lister.carousel .cpl-carousel-meta {
     padding-top: 0;
+}
+body.carvelo-theme main .category-products-lister .cpl-card-category{
+    text-align: center;
+    background-color: #1FAA6F;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    line-height: 1 !important;
+}
+body.carvelo-theme main .category-products-lister h3.cpl-card-title {
+    font-weight: bold;
+    font-size: 21px !important;
 }
