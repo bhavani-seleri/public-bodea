@@ -906,3 +906,7 @@ body.carvelo-theme .hero h5 {
     font-family: 'Adobe Clean Light' !important;
     margin-bottom: 10px;
 }
+body.carvelo-theme .button-container.cta-button a.button:hover {
+    border-color: red !important;
+    color: red !important;
+}

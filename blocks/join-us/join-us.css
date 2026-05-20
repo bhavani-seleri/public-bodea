@@ -288,6 +288,69 @@ main .join-us .delivery-section-item select:focus {
   box-shadow: 0 0 0 2px rgba(5, 99, 193, 0.15);
 }
 
+/* ── Carvelo theme: 2-column grid layout ──────────────────────────────── */
+body.carvelo-theme main .join-us {
+  max-width: 720px;
+  background: #fff;
+  box-shadow: 0 4px 24px rgb(0 0 0 / 8%);
+  border-radius: 12px;
+}
+
+body.carvelo-theme main .join-us h2#heading-join-us {
+  font-family: adobe-clean, proxima-nova, "Proxima Nova", sans-serif;
+  font-size: 1.5rem;
+  color: #000;
+}
+
+body.carvelo-theme main .join-us .panel-wrapper {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 1.25rem;
+}
+
+/* Full-width: headings, toggles, submit */
+body.carvelo-theme main .join-us .heading-wrapper,
+body.carvelo-theme main .join-us .field-wrapper.switch,
+body.carvelo-theme main .join-us .submit-wrapper {
+  grid-column: 1 / -1;
+}
+
+body.carvelo-theme main .join-us input:focus {
+  border-color: #f82216;
+  box-shadow: 0 0 0 3px rgb(248 34 22 / 10%);
+}
+
+body.carvelo-theme main .join-us .field-wrapper.switch input[type="checkbox"]:checked {
+  background: #f82216;
+}
+
+body.carvelo-theme main .join-us .submit-wrapper button {
+  width: 100%;
+  background: #f82216;
+  border-color: #f82216;
+  color: #fff;
+  border-radius: 9999px;
+}
+
+body.carvelo-theme main .join-us .submit-wrapper button:hover {
+  background: #c41a10;
+  border-color: #c41a10;
+  color: #fff;
+  transform: none;
+}
+
+@media (max-width: 600px) {
+  body.carvelo-theme main .join-us .panel-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  body.carvelo-theme main .join-us .heading-wrapper,
+  body.carvelo-theme main .join-us .field-wrapper.switch,
+  body.carvelo-theme main .join-us .submit-wrapper {
+    grid-column: 1;
+  }
+}
+
 /* Hide button config fields so they don't appear in HTML (same as sign-in) */
 .join-us [data-aue-prop="buttoneventtype"],
 .join-us [data-aue-prop="buttonwebhookurl"],
