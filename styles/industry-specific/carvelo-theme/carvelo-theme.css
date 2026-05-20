@@ -29,10 +29,9 @@ body.carvelo-theme main > .section:not([data-sec-full-width="true"]) {
   max-width: 1280px;
   width: 100%;
 }
-
-body.carvelo-theme main > .section > div {
-  max-width: 100%;
-  padding: 0;
+body.carvelo-theme main  > .section.bg-dark > div {
+    max-width: 1200px !important;
+    margin: auto !important;
 }
 
 /* ─── Typography ─────────────────────────────────────────────────────── */
