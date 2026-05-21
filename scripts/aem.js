@@ -705,6 +705,9 @@ function decorateSections(main) {
       applySectionTextColor(section, meta['sec-color'] ?? meta['section-text-color']);
       applySectionCustomClass(section, meta['sec-custom-styles'] ?? meta['custom-class']);
       applySectionTextAlignment(section, meta['sec-alignment'] ?? meta['text-alignment']);
+    } else {
+      // Apply custom class for sections with data-sec-custom-styles set directly (no section-metadata block)
+      applySectionCustomClass(section, section.dataset.secCustomStyles);
     }
     applySectionItemWidths(section);
   });
