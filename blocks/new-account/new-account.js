@@ -1,5 +1,5 @@
 /**
- * New Account block – 3-step wizard (same as application-form reference).
+ * New Account block – 3-step wizard.
  * Step 1: First name, Last name (side-by-side), Email address, Phone number.
  * Step 2: Address, State, ZIP code + City, Country.
  * Step 3: Date of birth, Social Security Number, Submit.

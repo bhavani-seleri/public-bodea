@@ -18,7 +18,7 @@ function applyButtonConfigToSubmitButton(block, config) {
 
 export default async function decorate(block) {
   const config = readBlockConfig(block) || {};
-  /* Hide button config rows on published/live, same as hero/cards */
+  /* Hide button config rows on published/live */
   [...block.children].forEach((row) => { row.style.display = 'none'; });
 
   // Prepare logo image if authored

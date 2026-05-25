@@ -2,7 +2,7 @@
  * Insurance block – single-step form (Life Insurance style).
  * UE-editable title for the main heading. Two-column layout: personal (First name, Last name, Birth date)
  * and address (Permanent Address, City, Zip Code, Country). Teal Submit button.
- * Uses same adaptive form runtime as application-form.
+ * Renders an adaptive form via the shared form module.
  */
 
 import { readBlockConfig, loadCSS } from '../../scripts/aem.js';

@@ -1,5 +1,5 @@
 /**
- * Application Form block – 3-step wizard matching reference look and feel.
+ * Credit Card Application Form block – 3-step wizard.
  * Step 1: First name, Last name (side-by-side), Email address, Phone number.
  * Step 2: Address, State (dropdown), ZIP code + City (side-by-side), Country (dropdown).
  * Step 3: Date of birth, Social Security Number, Submit.

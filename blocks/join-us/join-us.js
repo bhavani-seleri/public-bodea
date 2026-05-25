@@ -1,5 +1,5 @@
 /**
- * Join Us block – same pattern as sign-in: adaptive form definition + form module.
+ * Join Us block – adaptive form definition rendered via the form module.
  * Form: JOIN WKND FLY CLUB heading, First Name, Last Name, Email, Phone, consent toggle, JOIN US button. All optional.
  * On submit, show green success popup: "Thank you for joining WKND Fly Club..."
  * Button config (event type, webhook, form id, data) is authorable; custom event fired on success for Launch.
@@ -216,7 +216,7 @@ export default async function decorate(block) {
     ],
   };
 
-  // Create form container and inject definition (same as sign-in)
+  // Create form container and inject definition
   const formContainer = document.createElement('div');
   formContainer.className = 'form';
 

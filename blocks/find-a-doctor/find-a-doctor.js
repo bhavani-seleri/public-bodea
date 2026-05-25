@@ -718,7 +718,7 @@ export default async function decorate(block) {
             }
   });
 
-  // Hide config rows but keep them in DOM (like cards block)
+  // Hide config rows but keep them in DOM
   const configRows = Array.from(block.children);
   configRows.forEach((row) => {
     row.style.display = 'none';

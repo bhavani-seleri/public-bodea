@@ -120,7 +120,7 @@ async function fetchAllProducts(path, isAuthor) {
 }
 
 /**
- * Build a recommendation card (similar to new-arrival.js)
+ * Build a recommendation card
  * @param {Object} item - Product data
  * @param {boolean} isAuthor - Is author environment
  * @returns {HTMLElement} - Product card

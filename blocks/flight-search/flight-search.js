@@ -473,7 +473,7 @@ function setupClickOutside() {
 export default async function decorate(block) {
   const config = readBlockConfig(block) || {};
   const isAuthor = isAuthorEnvironment();
-  /* Hide button config rows (index >= 7) on published/live, same as hero/cards */
+  /* Hide button config rows (index >= 7) on published/live */
   [...block.children].forEach((row, index) => {
     if (index >= 7) row.style.display = 'none';
   });
