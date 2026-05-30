@@ -62,7 +62,6 @@
       "order-summary",
       "product-detail",
       "product-card",
-      "product-card-list",
       "build-your-own"
     ]
   },
@@ -105,12 +104,6 @@
     "id": "tabs",
     "components": [
       "tabs-item"
-    ]
-  },
-  {
-    "id": "product-card-list",
-    "components": [
-      "product-item"
     ]
   },
   {
