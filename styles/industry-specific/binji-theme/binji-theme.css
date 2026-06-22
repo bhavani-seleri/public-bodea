@@ -6,20 +6,21 @@
  * refine with exact binji2 computed-style tokens when available.
  */
 
-/* (a) Generic base tokens — inherited by every block via var(--...) */
+/* (a) Generic base tokens.
+   NOTE: styles.css computes the semantic vars (--nav-background-color, etc.) at :root via
+   var(--brand-*, fallback). --brand-* set on body would NOT propagate into those :root-computed
+   vars, so we override the FINAL semantic vars directly here (same approach as luma-theme). */
 body.binji-theme {
-  --brand-theme-color: #ff8038;
-  --brand-background-color: #0b0b0f;
-  --brand-text-color: #fff;
-  --brand-light-text-color: #fff;
-  --brand-link-color: #fff;
-  --brand-link-hover-color: #ff8038;
-  --brand-nav-background-color: #0b0b0f;
-  --brand-nav-text-color: #fff;
-  --brand-footer-background-color: #000;
-  --brand-footer-text-color: #a0a0a0;
-  --main-accent-color: #ff8038;
+  --background-color: #000;
+  --text-color: #fff;
+  --text-light: #fff;
+  --link-color: #fff;
   --link-hover-color: #ff8038;
+  --main-accent-color: #ff8038;
+  --nav-background-color: #000;
+  --nav-text-color: #fff;
+  --footer-background-color: #000;
+  --footer-text-color: #a0a0a0;
   --light-color: #1a1a1f;
 
   display: flex;
@@ -76,18 +77,27 @@ body.binji-theme header .lang-switcher .lang-item a:hover {
   color: var(--main-accent-color);
 }
 
-/* Nav links */
+/* Nav links — left-aligned (override header.css justify-content: center on ul) */
+body.binji-theme header nav .nav-sections ul {
+  justify-content: flex-start;
+}
+
+/* list items hold plain text (no <a>), so style the <li> too */
+body.binji-theme header nav .nav-sections ul > li,
 body.binji-theme header nav .nav-sections ul > li > a {
   color: var(--nav-text-color);
   font-family: var(--heading-font-family);
   font-size: 1rem;
+  cursor: pointer;
 }
 
 body.binji-theme header nav .nav-sections ul > li > a::before {
   background: var(--main-accent-color);
 }
 
+body.binji-theme header nav .nav-sections ul > li:hover,
 body.binji-theme header nav .nav-sections ul > li > a:hover,
+body.binji-theme header nav .nav-sections ul > li[aria-expanded="true"],
 body.binji-theme header nav .nav-sections ul > li[aria-expanded="true"] > a {
   color: var(--main-accent-color);
 }
@@ -120,25 +130,26 @@ body.binji-theme header .search.search-icon .search-input::placeholder {
   color: #a0a0a0;
 }
 
-/* Sign-in — accent CTA pill */
+/* Sign-in — outlined white pill (transparent), fills accent on hover */
 body.binji-theme header a.sign-in-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   padding: 8px 22px;
-  background-color: var(--main-accent-color);
-  color: #fff;
-  border: 1px solid var(--main-accent-color);
+  background-color: transparent;
+  color: var(--nav-text-color);
+  border: 1px solid var(--nav-text-color);
   border-radius: var(--border-radius-x-large);
   font-family: var(--heading-font-family);
   text-decoration: none;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 body.binji-theme header a.sign-in-btn:hover {
-  background-color: transparent;
-  color: var(--main-accent-color);
+  background-color: var(--main-accent-color);
+  border-color: var(--main-accent-color);
+  color: #fff;
 }
 
 /* Mobile hamburger */
