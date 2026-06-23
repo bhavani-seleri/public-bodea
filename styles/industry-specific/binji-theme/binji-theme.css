@@ -1,28 +1,35 @@
 /*
- * Binji Theme — generic brand tokens + header.
- * Scoped entirely under body.binji-theme. Modeled on luma-theme.css.
- * Reference: https://dsn.adobe.com/web/binji2 (dark streaming UI).
- * Color/font values are repo-derived fallbacks (Binji orange #ff8038 + neutrals);
- * refine with exact binji2 computed-style tokens when available.
+ * Binji Theme
+ * Scoped entirely under body.binji-theme.
+ *
+ * NOTE: styles.css computes semantic vars (--nav-background-color, etc.) at :root
+ * via var(--brand-*, fallback). Setting --brand-* on body does NOT propagate into
+ * those :root-computed vars — override FINAL semantic vars directly (same as luma-theme).
  */
 
-/* (a) Generic base tokens.
-   NOTE: styles.css computes the semantic vars (--nav-background-color, etc.) at :root via
-   var(--brand-*, fallback). --brand-* set on body would NOT propagate into those :root-computed
-   vars, so we override the FINAL semantic vars directly here (same approach as luma-theme). */
+/* =============================================================================
+   1. DESIGN TOKENS
+   ============================================================================= */
+
 body.binji-theme {
+  /* Colors */
   --background-color: #000;
   --text-color: #fff;
   --text-light: #fff;
   --link-color: #fff;
   --link-hover-color: #ff8038;
   --main-accent-color: #ff8038;
-  --nav-background-color: #000;
-  --nav-text-color: #fff;
-  --footer-background-color: #000;
-  --footer-text-color: #a0a0a0;
   --light-color: #1a1a1f;
 
+  /* Navigation */
+  --nav-background-color: #000;
+  --nav-text-color: #fff;
+
+  /* Footer */
+  --footer-background-color: #000;
+  --footer-text-color: #a0a0a0;
+
+  /* Sticky full-height layout */
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -32,9 +39,13 @@ body.binji-theme main {
   flex: 1;
 }
 
-/* (b) Header */
-/* stylelint-disable no-descending-specificity -- nav-link vs lang-switcher rules target
-   unrelated elements; cross-selector specificity ordering is a false positive here. */
+/* =============================================================================
+   2. HEADER
+   ============================================================================= */
+
+/* stylelint-disable no-descending-specificity */
+
+/* 2.1 Nav wrapper — dark bar */
 body.binji-theme header .nav-wrapper {
   background-color: var(--nav-background-color);
   color: var(--nav-text-color);
@@ -44,7 +55,24 @@ body.binji-theme header nav#nav {
   max-width: 1400px;
 }
 
-/* Logo */
+/* 2.2 Nav layout — logo | links | … | tools */
+body.binji-theme header nav {
+  justify-content: flex-start;
+  gap: 40px;
+}
+
+body.binji-theme header nav .nav-sections {
+  flex: 0 0 auto;
+}
+
+body.binji-theme header nav .nav-tools {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: auto;
+}
+
+/* 2.3 Logo */
 body.binji-theme header .nav-brand,
 body.binji-theme header nav .nav-brand a,
 body.binji-theme header nav .nav-brand picture {
@@ -53,11 +81,38 @@ body.binji-theme header nav .nav-brand picture {
 }
 
 body.binji-theme header nav .nav-brand picture img {
-  max-height: 40px;
   width: auto;
+  max-height: 40px;
 }
 
-/* Language switcher (declared before nav links to satisfy specificity order) */
+/* 2.4 Nav links */
+body.binji-theme header nav .nav-sections ul {
+  justify-content: flex-start;
+}
+
+/* <li> may hold plain text (no <a>), so color both */
+body.binji-theme header nav .nav-sections ul > li,
+body.binji-theme header nav .nav-sections ul > li > a {
+  color: var(--nav-text-color);
+  font-family: var(--heading-font-family);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* Active underline indicator */
+body.binji-theme header nav .nav-sections ul > li > a::before {
+  background: var(--main-accent-color);
+}
+
+/* Hover + expanded states */
+body.binji-theme header nav .nav-sections ul > li:hover,
+body.binji-theme header nav .nav-sections ul > li > a:hover,
+body.binji-theme header nav .nav-sections ul > li[aria-expanded="true"],
+body.binji-theme header nav .nav-sections ul > li[aria-expanded="true"] > a {
+  color: var(--main-accent-color);
+}
+
+/* 2.5 Language switcher */
 body.binji-theme header .lang-switcher .lang-button {
   color: var(--nav-text-color);
   background-color: transparent;
@@ -77,52 +132,7 @@ body.binji-theme header .lang-switcher .lang-item a:hover {
   color: var(--main-accent-color);
 }
 
-/* Nav layout — links sit right after logo; tools pushed to far right */
-body.binji-theme header nav {
-  justify-content: flex-start;
-  gap: 40px;
-}
-
-body.binji-theme header nav .nav-sections {
-  flex: 0 0 auto;
-}
-
-body.binji-theme header nav .nav-tools {
-  margin-left: auto;
-}
-
-body.binji-theme header nav .nav-sections ul {
-  justify-content: flex-start;
-}
-
-/* list items hold plain text (no <a>), so style the <li> too */
-body.binji-theme header nav .nav-sections ul > li,
-body.binji-theme header nav .nav-sections ul > li > a {
-  color: var(--nav-text-color);
-  font-family: var(--heading-font-family);
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-body.binji-theme header nav .nav-sections ul > li > a::before {
-  background: var(--main-accent-color);
-}
-
-body.binji-theme header nav .nav-sections ul > li:hover,
-body.binji-theme header nav .nav-sections ul > li > a:hover,
-body.binji-theme header nav .nav-sections ul > li[aria-expanded="true"],
-body.binji-theme header nav .nav-sections ul > li[aria-expanded="true"] > a {
-  color: var(--main-accent-color);
-}
-
-/* Tools wrapper (search-container.nav-tools) */
-body.binji-theme header nav .nav-tools {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-/* Search */
+/* 2.6 Search */
 body.binji-theme header .search.search-icon .search-trigger .icon img {
   filter: invert(1);
 }
@@ -143,18 +153,18 @@ body.binji-theme header .search.search-icon .search-input::placeholder {
   color: #a0a0a0;
 }
 
-/* Sign-in — outlined white pill (transparent), fills accent on hover */
+/* 2.7 Sign-in — outlined white pill, fills accent on hover */
 body.binji-theme header a.sign-in-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
   padding: 8px 22px;
   background-color: transparent;
   color: var(--nav-text-color);
   border: 1px solid var(--nav-text-color);
   border-radius: var(--border-radius-x-large);
   font-family: var(--heading-font-family);
+  text-align: center;
   text-decoration: none;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
@@ -165,25 +175,56 @@ body.binji-theme header a.sign-in-btn:hover {
   color: #fff;
 }
 
-/* (c) Footer */
+/* 2.8 Mobile hamburger
+   Only pseudo-elements get a background. The .nav-hamburger-icon element itself
+   must stay transparent when aria-expanded="true" (it is 22px tall at that point;
+   adding background-color produces a white rectangle on mobile). */
+body.binji-theme header .nav-hamburger button {
+  color: var(--nav-text-color);
+}
+
+body.binji-theme header .nav-hamburger-icon::before,
+body.binji-theme header .nav-hamburger-icon::after {
+  background-color: var(--nav-text-color);
+}
+
+/* 2.9 Header — mobile (< 900px) */
+@media (width < 900px) {
+  body.binji-theme header nav .nav-sections ul > li,
+  body.binji-theme header nav .nav-sections ul > li > a {
+    color: var(--nav-text-color);
+  }
+
+  body.binji-theme header nav[aria-expanded='true'] .nav-sections {
+    background-color: var(--nav-background-color);
+  }
+}
+
+/* stylelint-enable no-descending-specificity */
+
+/* =============================================================================
+   3. FOOTER
+   ============================================================================= */
+
+/* 3.1 Footer base */
 body.binji-theme footer {
   background-color: var(--footer-background-color);
   color: var(--footer-text-color);
 }
 
-/* Match footer container width to header nav (1400px) */
+/* Match container width to header (1400px) */
 body.binji-theme footer .footer > div {
   max-width: 1400px;
 }
 
-/* Reset footer.css img margin-bottom that breaks inline row */
+/* Reset footer.css: img has width:100px + margin-bottom:20px which breaks the inline logo row */
 body.binji-theme footer .footer img {
-  margin-bottom: 0;
   width: auto;
   max-height: 36px;
+  margin-bottom: 0;
 }
 
-/* Logo + nav links row — no divider */
+/* 3.2 Logo + nav links row */
 body.binji-theme footer .footer .section:not(.default) {
   padding-bottom: 24px;
 }
@@ -202,15 +243,15 @@ body.binji-theme footer .footer .section:not(.default) p {
 body.binji-theme footer .footer .section:not(.default) ul {
   display: flex;
   gap: 32px;
-  list-style: none;
   padding: 0;
   margin: 0;
+  list-style: none;
 }
 
 body.binji-theme footer .footer .section:not(.default) ul li {
   color: #fff;
-  font-size: 0.9rem;
   font-family: var(--heading-font-family);
+  font-size: 0.9rem;
   cursor: pointer;
 }
 
@@ -218,18 +259,18 @@ body.binji-theme footer .footer .section:not(.default) ul li:hover {
   color: var(--main-accent-color);
 }
 
-/* Copyright row */
+/* 3.3 Copyright / disclaimer row */
 body.binji-theme footer .footer .default.section {
   padding-top: 20px;
   border-top: 1px solid rgb(255 255 255 / 10%);
 }
 
 body.binji-theme footer .footer .default.section p {
+  max-width: 480px;
+  margin: 0;
   color: #c1c1c1;
   font-size: 0.8rem;
-  margin: 0;
   line-height: 1.6;
-  max-width: 480px;
 }
 
 body.binji-theme footer .footer .default.section a {
@@ -237,22 +278,8 @@ body.binji-theme footer .footer .default.section a {
   text-decoration: none;
 }
 
-/* Mobile hamburger */
-body.binji-theme header .nav-hamburger button {
-  color: var(--nav-text-color);
-}
-
-body.binji-theme header .nav-hamburger-icon,
-body.binji-theme header .nav-hamburger-icon::before,
-body.binji-theme header .nav-hamburger-icon::after {
-  background-color: var(--nav-text-color);
-}
-
+/* 3.4 Footer — mobile (< 900px) */
 @media (width < 900px) {
-  body.binji-theme header nav .nav-sections ul > li > a {
-    color: var(--nav-text-color);
-  }
-
   body.binji-theme footer .footer .section:not(.default) .default-content-wrapper {
     flex-direction: column;
     align-items: flex-start;
@@ -260,7 +287,6 @@ body.binji-theme header .nav-hamburger-icon::after {
   }
 
   body.binji-theme footer .footer .section:not(.default) ul {
-    display: flex !important;
     flex-wrap: wrap;
     gap: 12px 24px;
   }
@@ -269,4 +295,3 @@ body.binji-theme header .nav-hamburger-icon::after {
     max-width: 100%;
   }
 }
-/* stylelint-enable no-descending-specificity */
