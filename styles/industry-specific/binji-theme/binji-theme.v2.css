@@ -26,7 +26,9 @@ body.binji-theme main .sign-in-wrapper .sign-in.block label {
 body.binji-theme main .sign-in-wrapper .sign-in.block [data-required=true] > label::after {
   content: unset;
 }
-body.binji-theme main .sign-in-wrapper .sign-in.block input[type=text], body.binji-theme main .sign-in-wrapper .sign-in.block input[type=email], body.binji-theme main .sign-in-wrapper .sign-in.block input[type=password] {
+body.binji-theme main .sign-in-wrapper .sign-in.block input[type=text],
+body.binji-theme main .sign-in-wrapper .sign-in.block input[type=email],
+body.binji-theme main .sign-in-wrapper .sign-in.block input[type=password] {
   margin: 0;
   height: 32px;
   padding: 3px 12px 5px 11px;
@@ -193,7 +195,9 @@ body.binji-theme main .section.binji-promo-banner .columns.block .columns-item-v
   max-width: 450px;
 }
 @media screen and (max-width: 768px) {
-  body.binji-theme main .section.binji-promo-banner .columns.block .columns-item-vertical:not(.columns-img-col) h1, body.binji-theme main .section.binji-promo-banner .columns.block .columns-item-vertical:not(.columns-img-col) h2, body.binji-theme main .section.binji-promo-banner .columns.block .columns-item-vertical:not(.columns-img-col) p {
+  body.binji-theme main .section.binji-promo-banner .columns.block .columns-item-vertical:not(.columns-img-col) h1,
+  body.binji-theme main .section.binji-promo-banner .columns.block .columns-item-vertical:not(.columns-img-col) h2,
+  body.binji-theme main .section.binji-promo-banner .columns.block .columns-item-vertical:not(.columns-img-col) p {
     text-align: center;
   }
   body.binji-theme main .section.binji-promo-banner .columns.block .columns-item-vertical:not(.columns-img-col) .button {
