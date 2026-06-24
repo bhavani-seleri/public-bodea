@@ -88,6 +88,18 @@ body.binji-theme main .sign-in-wrapper .sign-in.block:has(.create-account-link) 
     left: 100px;
   }
 }
+body.binji-theme main .sign-in-page.section .sign-in-wrapper .sign-in.block {
+  margin: 0 auto;
+}
+body.binji-theme main .sign-in-page.section .sign-in-wrapper .sign-in.block .heading-wrapper {
+  display: block;
+}
+body.binji-theme main .sign-in-page.section .sign-in-wrapper .sign-in.block .heading-wrapper h2#heading-sign-in {
+  font-size: 28px;
+  margin: 0.67rem auto;
+  padding-bottom: 32px;
+  color: #fff;
+}
 body.binji-theme main > .section.home-nli-banner.section-has-bg[data-sec-full-width=true] > div {
   margin: 0;
   padding: 0;
