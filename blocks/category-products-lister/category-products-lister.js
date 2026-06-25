@@ -9,7 +9,7 @@ import {
 const PUBLISH_GRAPHQL_PROXY_ENDPOINT = "https://275323-918sangriatortoise.adobeioruntime.net/api/v1/web/dx-excshell-1/fetch-product-information";
 const GRAPHQL_CONFIG_PATH = '/content/binji/graphql.json';
 const AUTHOR_GRAPHQL_BASE = '/graphql/execute.json/dsn-eds-configuration/';
-const DEFAULT_GRAPHQL_QUERY_NAME = 'productsListByPath';
+const DEFAULT_GRAPHQL_QUERY_NAME = 'productListByPathBodea';
 
 let graphqlConfigPromise;
 async function getGraphQLConfig() {
