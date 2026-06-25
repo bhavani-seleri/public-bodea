@@ -4,11 +4,29 @@ import { dispatchCustomEvent } from "../../scripts/custom-events.js";
 import {
   getEnvironmentValue,
   getHostname,
-  getAuthorProductsEndpoint,
-  getPublishProductsEndpointKey,
 } from '../../scripts/utils.js';
 
 const PUBLISH_GRAPHQL_PROXY_ENDPOINT = "https://275323-918sangriatortoise.adobeioruntime.net/api/v1/web/dx-excshell-1/fetch-product-information";
+const GRAPHQL_CONFIG_PATH = '/content/binji/graphql.json';
+const AUTHOR_GRAPHQL_BASE = '/graphql/execute.json/dsn-eds-configuration/';
+const DEFAULT_GRAPHQL_QUERY_NAME = 'productsListByPath';
+
+let graphqlConfigPromise;
+async function getGraphQLConfig() {
+  if (!graphqlConfigPromise) {
+    graphqlConfigPromise = fetch(GRAPHQL_CONFIG_PATH)
+      .then((r) => (r.ok ? r.json() : {}))
+      .catch(() => ({}));
+  }
+  return graphqlConfigPromise;
+}
+
+async function getGraphQLQueryName() {
+  const cfg = await getGraphQLConfig();
+  const row = cfg?.data?.find((r) => r.key === 'graphql-query-name');
+  return row?.value?.trim() || DEFAULT_GRAPHQL_QUERY_NAME;
+}
+
 let categoryProductsAuthorBasePromise;
 let categoryProductsPublishEnvironmentPromise;
 
@@ -153,15 +171,14 @@ async function fetchProducts(path) {
     if (!path) return [];
 
     const isAuthor = isAuthorEnvironment();
-    const [authorBase, environment, authorEndpoint, publishKey] = await Promise.all([
+    const [authorBase, environment, queryName] = await Promise.all([
       getCategoryProductsAuthorBase(),
       getCategoryProductsPublishEnvironment(),
-      getAuthorProductsEndpoint(),
-      getPublishProductsEndpointKey(),
+      getGraphQLQueryName(),
     ]);
     const url = isAuthor
-      ? `${authorBase}${authorEndpoint}_path=${path}`
-      : `${PUBLISH_GRAPHQL_PROXY_ENDPOINT}?endpoint=${publishKey}${environment ? `&environment=${environment}` : ''}&_path=${path}`;
+      ? `${authorBase}${AUTHOR_GRAPHQL_BASE}${queryName};_path=${path}`
+      : `${PUBLISH_GRAPHQL_PROXY_ENDPOINT}?endpoint=${queryName}${environment ? `&environment=${environment}` : ''}&_path=${path}`;
 
     const resp = await fetch(url, {
       method: 'GET',
