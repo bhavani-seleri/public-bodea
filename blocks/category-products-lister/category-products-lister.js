@@ -15,7 +15,10 @@ let graphqlConfigPromise;
 async function getGraphQLConfig() {
   if (!graphqlConfigPromise) {
     graphqlConfigPromise = fetch(GRAPHQL_CONFIG_PATH)
-      .then((r) => (r.ok ? r.json() : {}))
+      .then((r) => {
+        if (!r.ok) return {};
+        return r.json().then((json) => (Array.isArray(json?.data) ? json : {}));
+      })
       .catch(() => ({}));
   }
   return graphqlConfigPromise;
