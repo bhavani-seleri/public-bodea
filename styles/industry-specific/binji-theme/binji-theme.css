@@ -287,6 +287,9 @@ body.binji-theme header .nav-hamburger-icon::after {
 
 /* 2.9 Header — mobile (< 900px) */
 @media (width < 900px) {
+  body.binji-theme:has(.user-profile-host) header nav .nav-sections {
+    display: none;
+  }
 
   body.binji-theme header nav .nav-sections ul>li,
   body.binji-theme header nav .nav-sections ul>li>a {
@@ -295,6 +298,10 @@ body.binji-theme header .nav-hamburger-icon::after {
 
   body.binji-theme header nav[aria-expanded='true'] .nav-sections {
     background-color: var(--nav-background-color);
+  }
+
+  body.binji-theme:has(.user-profile-host) header nav[aria-expanded='true'] .nav-sections {
+    display: flex;
   }
 }
 
@@ -374,6 +381,14 @@ body.binji-theme footer .footer .default.section p {
 body.binji-theme footer .footer .default.section a {
   color: #c1c1c1;
   text-decoration: none;
+}
+
+body.binji-theme header .nav-hamburger {
+  display: none;
+}
+
+body.binji-theme:has(.user-profile-host) header .nav-hamburger {
+  display: block;
 }
 
 /* Mobile hamburger */
@@ -457,6 +472,10 @@ body.binji-theme header .nav-hamburger-icon::after {
 
   body.binji-theme header nav[aria-expanded='true'] .nav-tools .lang-switcher {
     display: none !important;
+  }
+
+  body.binji-theme footer {
+    padding: 0 16px;
   }
 
   body.binji-theme footer .footer .section:not(.default) .default-content-wrapper {
