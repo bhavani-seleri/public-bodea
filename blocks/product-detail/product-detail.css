@@ -526,6 +526,7 @@ main .product-detail .pd-rec-card-title {
    ========================================================================== */
 
 .section.product-detail-container:has(.pd-video-layout),
+.section.product-detail-container:has(.pd-video-layout) .product-detail,
 .section.product-detail-container:has(.pd-video-layout) .product-detail-wrapper {
   max-width: unset;
 }
@@ -552,7 +553,7 @@ main .product-detail .pd-video-layout .pd-video-image-wrapper {
 
 main .product-detail .pd-video-layout .pd-video-player {
     width: auto;
-    height: 100%;
+    height: 800px;
     object-fit: cover;
     display: block;
     border-radius: 12px;
@@ -569,7 +570,7 @@ main .product-detail .pd-container.pd-video-layout .pd-content {
         "extras extras"
         "quantity quantity"
         "actions actions";
-    column-gap: 24px;
+    gap: 24px;
     align-items: center;
     padding-top: 0;
     max-width: 1200px;
@@ -586,7 +587,7 @@ main .product-detail .pd-container.pd-video-layout .pd-video-meta {
     grid-area: meta;
     display: flex;
     align-items: center;
-    justify-content: flex-end; /* Push to the right edge */
+    justify-content: flex-start; /* Push to the right edge */
     flex-wrap: wrap;
     gap: 16px;
     margin: 0; 
@@ -622,6 +623,7 @@ main .product-detail .pd-container.pd-video-layout .pd-quantity {
 main .product-detail .pd-container.pd-video-layout .pd-actions {
     grid-area: actions;
     justify-content: flex-start;
+    max-width: 520px;
 }
 
 /* Pill and Badge Styles (keeping default colors) */
