@@ -627,7 +627,7 @@ body.binji-theme main .product-detail .pd-video-layout .pd-video-age {
   line-height: 1;
 }
 
-body.binji-theme .product-detail .pd-video-layout .pd-cast {
+body.binji-theme main .product-detail .pd-container.pd-video-layout .pd-cast {
   grid-area: cast;
   color: #fff;
   font-size: 21px;
@@ -637,10 +637,11 @@ body.binji-theme .product-detail .pd-video-layout .pd-cast {
 }
 
 /* 4.6 Description */
-body.binji-theme .product-detail .pd-description {
+body.binji-theme main .product-detail .pd-container.pd-video-layout .pd-description {
   color: #fff;
   grid-area: description;
   border-top: 0;
+  margin: 0;
 }
 
 body.binji-theme .product-detail .pd-description a {
