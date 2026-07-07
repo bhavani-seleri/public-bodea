@@ -905,3 +905,44 @@ body.frescopa-theme main .product-detail .pd-btn {
   min-width: 180px;
   padding: 0.875rem 2.5rem;
 }
+
+/* ─── Product Detail - Extras & Quantity Overrides ───────────────────── */
+body.frescopa-theme main .product-detail .pd-extras-title,
+body.frescopa-theme main .product-detail .pd-quantity-title {
+  color: #58181d;
+  font-family: baskerville-display-pt, Baskerville, "Times New Roman", serif !important;
+  font-weight: 400;
+}
+
+body.frescopa-theme main .product-detail .pd-extra-label {
+  color: #58181d;
+  font-family: roboto, roboto-fallback, sans-serif;
+}
+
+body.frescopa-theme main .product-detail .pd-extra-checkbox {
+  accent-color: #27647d; /* Matches the Frescopa teal button color */
+  width: 18px;
+  height: 18px;
+}
+
+body.frescopa-theme main .product-detail .pd-quantity-select {
+  color: #58181d;
+  border: 2px solid #eaa33a;
+  border-radius: 50px;
+  padding: 10px 36px 10px 20px;
+  background-color: #ffffff;
+  /* Reuses Frescopa's custom dropdown chevron */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%2358181d' stroke-width='1.5' fill='none' stroke-linecap='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+}
+
+body.frescopa-theme main .product-detail .pd-quantity-select:focus {
+  border-color: #b89450;
+  outline: none;
+}
+
+/* Hide the default theme-agnostic text arrow since we are using the Frescopa SVG */
+body.frescopa-theme main .product-detail .pd-quantity-select-wrapper::after {
+  display: none;
+}

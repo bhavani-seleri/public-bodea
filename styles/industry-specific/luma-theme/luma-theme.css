@@ -665,3 +665,42 @@ body.luma-theme .na-carousel-wrapper{
     grid-column: 1 / -1;
   }
 }
+
+/* ─── Product Detail - Extras & Quantity Overrides ───────────────────── */
+body.luma-theme main .product-detail .pd-extras-title,
+body.luma-theme main .product-detail .pd-quantity-title {
+  font-family: 'Adobe Clean Bold', sans-serif;
+  color: #000000;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+}
+
+body.luma-theme main .product-detail .pd-extra-label {
+  color: #2f3138;
+  font-family: 'Adobe Clean Bold', sans-serif;
+  font-size: 0.95rem;
+}
+
+body.luma-theme main .product-detail .pd-extra-checkbox {
+  accent-color: var(--main-accent-color); /* Pulls the Luma blue variable */
+  border-radius: 0;
+}
+
+body.luma-theme main .product-detail .pd-quantity-select {
+  border: 2px solid #d8d8d8;
+  border-radius: 0; /* Square edges for Luma */
+  color: #2f3138;
+  height: 42px;
+  padding: 0 32px 0 16px;
+  font-family: 'Adobe Clean Bold', sans-serif;
+}
+
+body.luma-theme main .product-detail .pd-quantity-select:focus {
+  border-color: #bdbdbd;
+}
+
+/* Make the default text dropdown arrow match Luma's text color */
+body.luma-theme main .product-detail .pd-quantity-select-wrapper::after {
+  color: #2f3138;
+  font-size: 0.75rem;
+}
