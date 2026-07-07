@@ -965,13 +965,12 @@ body.frescopa-theme main .product-detail .recipe-sidebar .pd-rec-card-title {
   color: #58181d;
   font-family: baskerville-display-pt, Baskerville, "Times New Roman", serif !important;
   font-weight: 400;
-  font-size: 16px;
   text-align: left;
   text-transform: none;
 }
 
-body.frescopa-theme main .product-detail .recipe-sidebar .pd-rec-title {
-  font-size: 21px;
+body.frescopa-theme main .product-detail .recipe-sidebar .pd-rec-card-title {
+  font-size: 16px !important;
 }
 
 body.frescopa-theme main .product-detail .recipe-sidebar .pd-rec-card-meta::after {
