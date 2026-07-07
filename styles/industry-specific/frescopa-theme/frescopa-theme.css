@@ -958,42 +958,30 @@ body.frescopa-theme main .product-detail .pd-quantity-select:focus {
 body.frescopa-theme main .product-detail .pd-quantity-select-wrapper::after {
   display: none;
 }
+/* ─── Recipe Sidebar Recommendations Overrides - Frescopa ────────────── */
 
-/* ─── Recipe Sidebar Overrides - Frescopa ─────────────────────────────── */
-
-/* Author Profile */
-body.frescopa-theme main .product-detail .recipe-author__name {
+body.frescopa-theme main .product-detail .recipe-sidebar .pd-rec-title,
+body.frescopa-theme main .product-detail .recipe-sidebar .pd-rec-card-title {
   color: #58181d;
   font-family: baskerville-display-pt, Baskerville, "Times New Roman", serif !important;
   font-weight: 400;
-}
-
-body.frescopa-theme main .product-detail .recipe-author__role {
-  color: #58181d;
-  font-family: roboto, roboto-fallback, sans-serif;
-  opacity: 0.8;
-}
-
-/* Sidebar Recommendation Title */
-body.frescopa-theme main .product-detail .recipe-sidebar .pd-rec-title {
-  color: #58181d;
-  font-family: baskerville-display-pt, Baskerville, "Times New Roman", serif !important;
-  font-weight: 400;
+  font-size: 16px;
+  text-align: left;
   text-transform: none;
 }
 
-/* Sidebar "Try it" Button (Pseudo-element) */
-body.frescopa-theme main .product-detail .recipe-sidebar .pd-rec-card-meta::after {
-  font-family: roboto, roboto-fallback, sans-serif;
-  color: #27647d; /* Frescopa teal */
-  border-color: #27647d;
-  border-radius: 999px; /* Pill shape */
-  padding: 4px 16px 6px;
+body.frescopa-theme main .product-detail .recipe-sidebar .pd-rec-title {
+  font-size: 21px;
 }
 
-/* Sidebar "Try it" Button Hover */
+body.frescopa-theme main .product-detail .recipe-sidebar .pd-rec-card-meta::after {
+  color: #58181d;
+  border-color: #58181d;
+  border-radius: 50px; /* Frescopa pill shape */
+  font-family: roboto, roboto-fallback, sans-serif;
+}
+
 body.frescopa-theme main .product-detail .recipe-sidebar .pd-rec-card:hover .pd-rec-card-meta::after {
-  background-color: #27647d;
+  background-color: #58181d;
   color: #ffffff;
-  border-color: #27647d;
 }
