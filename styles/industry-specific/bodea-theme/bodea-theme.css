@@ -39,6 +39,16 @@ body.bodea-theme main  > .section.bg-dark > div {
     max-width: 1200px !important;
     margin: auto !important;
 }
+/* header */
+body.bodea-theme header {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    padding-top: 24px;
+    color: var(--nav-text-color);
+    background-color: var(--header-background-color);
+    transition: top .3s;
+}
 /* Banner */
 /* ===========================
    Bodea Banner
@@ -57,7 +67,7 @@ body.bodea-theme main .bodea-banner .hero {
 
 body.bodea-theme main .bodea-banner .hero {
     position: relative;
-    min-height: 640px;
+    height: 500px;
     display: block;
 }
 
@@ -73,7 +83,7 @@ body.bodea-theme main .bodea-banner .hero picture {
 
 body.bodea-theme main .bodea-banner .hero picture img {
     width: 100%;
-    height: 640px;
+    height: 100%;
     object-fit: cover;
     display: block;
 }
