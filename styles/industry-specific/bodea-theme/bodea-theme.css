@@ -41,7 +41,7 @@ body.bodea-theme main  > .section.bg-dark > div {
 }
 /* header */
 body.bodea-theme header {
-    display: flex;
+    display: none;
     width: 100%;
     overflow: hidden;
     padding-top: 24px;
@@ -92,13 +92,30 @@ body.bodea-theme main .bodea-banner .hero picture img {
 
 body.bodea-theme main .bodea-banner .hero > div:nth-child(2) {
     position: absolute;
-    left: 11%;
-    bottom: -70px;
-    width: 78%;
-    background: #fff;
-    padding: 40px 55px;
-    z-index: 5;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    max-width: 1200px;
+    width: 100%;
+    background-color: #fff;
+    padding-bottom: 2rem;
+    padding-top: 0;
     box-sizing: border-box;
+    border-bottom: 1px solid lightgray;
+    z-index: 5;
+}
+
+@media (min-width: 1200px) {
+
+    body.bodea-theme main .bodea-banner .hero > div:nth-child(2) {
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 1200px;
+        padding-left: 1.67em;
+        padding-right: 0;
+
+    }
+
 }
 
 /* Heading */
@@ -106,28 +123,33 @@ body.bodea-theme main .bodea-banner .hero > div:nth-child(2) {
 body.bodea-theme main .bodea-banner h1 {
     color: #1b1b1b;
     font-family: var(--heading-font-family);
-    font-size: 3.25rem;
+    font-size: 28px;
     font-weight: 400;
-    line-height: 1.15;
-    margin: 0 0 15px;
+    line-height: 1.5;
+    margin: 20px auto 0px;
+    text-align: left;
 }
 
 body.bodea-theme main .bodea-banner h1 strong {
-    font-weight: 400;
+    font-weight: 500;
 }
 
 /* Subtitle */
 
 body.bodea-theme main .bodea-banner p:first-of-type {
+   text-align: left;
     color: #222;
-    font-size: 1.4rem;
-    margin-bottom: 32px;
+    font-size: 16px;
+    font-weight: 300;
+    margin-top:0;
+    line-height: 2rem;
 }
 
 /* Button */
 
 body.bodea-theme main .bodea-banner .button-container {
-    margin: 0;
+    margin-top:1rem;
+    text-align:left;
 }
 
 body.bodea-theme main .bodea-banner .button {
@@ -139,6 +161,7 @@ body.bodea-theme main .bodea-banner .button {
     font-weight: 700;
     border-radius: 0;
     display: inline-block;
+    margin:0;
 }
 
 body.bodea-theme main .bodea-banner .button:hover {
