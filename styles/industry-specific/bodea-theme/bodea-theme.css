@@ -1,7 +1,7 @@
 body.bodea-theme {
   --bot-icon: url("https://demo-system-next.s3.amazonaws.com/assets/bot/bot.png");
-  --body-font-family: "Open Sans", sans-serif, proxima-nova, sans-serif;
-  --heading-font-family: "Open Sans", sans-serif, proxima-nova, sans-serif;
+  --body-font-family: "Adobe Clean", sans-serif;
+  --heading-font-family: "Adobe Clean", sans-serif;
   --logo: url("https://demo-system-next.s3.amazonaws.com/assets/bodea/Bodea_logo.png");
   --footer-logo: url("https://demo-system-next.s3.amazonaws.com/assets/bodea/Bodea_logo.png");
 
@@ -26,6 +26,7 @@ body.bodea-theme {
   min-height: 100vh;
 }
 
+
 body.bodea-theme main {
   flex: 1;
   overflow: hidden;
@@ -33,15 +34,15 @@ body.bodea-theme main {
 
 @media (min-width: 1200px) {
   body.bodea-theme main > * {
-    width: 1200px !important;
+    width: 1200px ;
     margin: 0 auto 1rem !important;
     padding: 0 !important;
   }
 }
 
 body.bodea-theme main > .section:not([data-sec-full-width="true"]) {
-  max-width: 1280px;
-  width: 100%;
+  max-width: none;
+  /* width: 100%; */
 }
 body.bodea-theme main  > .section.bg-dark > div {
     max-width: 1200px !important;
@@ -72,7 +73,7 @@ body.bodea-theme header {
 /* ─────────── Hero Banner ─────────── */
 
 body.bodea-theme main .bodea-banner {
-    max-width: 100% !important;
+    width: 100% !important;
     padding: 0;
 }
 
@@ -168,12 +169,16 @@ body.bodea-theme main .bodea-banner p:first-of-type {
 
 /* Button */
 
-body.bodea-theme main .bodea-banner .button-container {
+body.bodea-theme main .bodea-banner .button-container,
+body.bodea-theme main .bodea-greybx .button-container {
+  margin:0;
     margin-top:1rem;
     text-align:left;
 }
 
-body.bodea-theme main .bodea-banner .button {
+body.bodea-theme main .bodea-banner .button,
+body.bodea-theme main .bodea-greybx .button-container .button,
+body.bodea-theme main .bodea-service .button-container .button {
     background: #35b28c;
     border: 2px solid #35b28c;
     color: #fff !important;
@@ -186,7 +191,13 @@ body.bodea-theme main .bodea-banner .button {
     margin:0;
 }
 
-body.bodea-theme main .bodea-banner .button-container.cta-button a.button:hover {
+body.bodea-theme main .bodea-service .button-container .button{
+border-color: #fff;
+}
+
+body.bodea-theme main .bodea-banner .button-container.cta-button a.button:hover,
+body.bodea-theme main .bodea-greybx .button-container .button:hover,
+body.bodea-theme main .bodea-service .button-container .button:hover {
     background: var(--link-hover-color) !important;
     border-color: var(--link-hover-color) !important;
     box-shadow: none !important;
@@ -199,7 +210,9 @@ body.bodea-theme main .bodea-banner {
     margin:0 auto 1rem;
 }
 
-body.bodea-theme main .bodea-banner .button-container.cta-button a.button::after {
+body.bodea-theme main .bodea-banner .button-container.cta-button a.button::after,
+body.bodea-theme main .bodea-greybx .button-container a.button::after,
+body.bodea-theme main .bodea-service .button-container a.button::after{
  content: none;
 display: none;
 }
@@ -208,14 +221,7 @@ display: none;
 
 @media (max-width: 991px) {
 
-    body.bodea-theme main .bodea-banner .hero > div:nth-child(2) {
-        position: relative;
-        left: auto;
-        bottom: auto;
-        width: calc(100% - 40px);
-        margin: -80px auto 0;
-        padding: 32px;
-    }
+    
 
     body.bodea-theme main .bodea-banner .hero picture img {
         height: 450px;
@@ -230,10 +236,143 @@ display: none;
     }
 }
 
+body.bodea-theme main .bodea-title .default-content-wrapper{
+  padding : 0;
+}
+
 body.bodea-theme main .bodea-title .default-content-wrapper h1 {
     padding-top: 0;
     font-size: 28px;
-     margin-block-start: 0.67em;
+     margin-block-start: 1.2em;
     margin-block-end: 0.67em;
     font-weight:500;
+    position: relative;
+}
+
+body.bodea-theme main .bodea-title .default-content-wrapper h1:after {
+    content: "";
+    position: absolute;
+    width: 90px;
+    height: 1px;
+    bottom: -5px;
+    left: 0%;
+    border-bottom: 2px solid #35b28c;
+}
+
+/* bodea articles */
+body.bodea-theme main .article-card .cards-wrapper{
+  padding:0;
+}
+
+body.bodea-theme main .article-card .cards ul{
+  column-gap:32px;
+}
+
+body.bodea-theme main .article-card .cards ul > li {
+    flex: 1 1 25%;
+    max-width: 25%;
+}
+
+body.bodea-theme main .article-card .cards .cards-card-image {
+    height: 175px;
+    overflow: hidden;
+}
+
+body.bodea-theme main .article-card .cards .cards-card-image picture {
+    display: block;
+    height: 100%;
+}
+
+body.bodea-theme main .article-card .cards .cards-card-image img {
+  min-height:inherit;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+body.bodea-theme main .article-card .cards .cards-card-body {
+    padding: 0.5rem 0;
+}
+
+body.bodea-theme main .article-card .cards .cards-card-body h2 {
+    width: 80%;
+    margin: 0;
+    padding: 0;
+    letter-spacing: 1px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.5em;
+}
+
+body.bodea-theme main .article-card .cards .cards-card-body p {
+    font-weight: 200;
+    font-size: 11px;
+    margin: 1px 0 0;
+    line-height: 32px;
+}
+
+/* grey container */
+body.bodea-theme main .bodea-greybx {
+    background-color: #d9d6d65c;
+}
+
+body.bodea-theme main .bodea-greybx .columns-wrapper {
+    padding: 0;
+}
+
+body.bodea-theme main .bodea-greybx .columns-row {
+    gap: 32px;
+    
+}
+
+body.bodea-theme main .bodea-greybx .columns-row .column,
+body.bodea-theme main .bodea-service .columns-row .column{
+    gap: 0;
+}
+
+body.bodea-theme main .bodea-greybx .columns-row > div:first-child {
+    padding: 40px;
+    max-width:36%;
+}
+
+body.bodea-theme main .bodea-greybx .columns-row h2,
+body.bodea-theme main .bodea-service .columns-row h2 {
+    padding: 0;
+    width: 80%;
+    font-size: 28px;
+    font-weight: 300;
+    position: relative;
+    line-height: 1.5;
+}
+
+body.bodea-theme main .bodea-greybx .columns-row h2:after,
+body.bodea-theme main .bodea-service .columns-row h2:after {
+    content: "";
+    position: absolute;
+    width: 90px;
+    height: 1px;
+    bottom: -5px;
+    left: 0%;
+    border-bottom: 2px solid #35b28c;
+}
+
+body.bodea-theme main .bodea-greybx .columns-row > div:first-child p:first-of-type,
+body.bodea-theme main .bodea-service .columns-row > div:first-child p:first-of-type {
+    font-size: 16px;
+    line-height: 32px;
+    margin :0;
+}
+
+/* services */
+body.bodea-theme main .bodea-service .columns-row > div {
+    background-color: #35b28c;
+    color: #fff ;
+    min-height: 400px;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+body.bodea-theme main .bodea-service .columns-row h2:after {
+    border-bottom: 2px solid #ffffff;
 }
