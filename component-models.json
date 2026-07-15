@@ -9321,7 +9321,7 @@
     "id": "newsletter",
     "fields": [
       {
-        "component": "aem-content",
+        "component": "reference",
         "name": "image",
         "label": "Image",
         "valueType": "string",
