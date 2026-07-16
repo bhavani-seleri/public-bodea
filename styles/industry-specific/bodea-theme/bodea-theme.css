@@ -337,6 +337,11 @@ body.bodea-theme main .article-card .cards .cards-card-body h2 {
     line-height: 1.5em;
 }
 
+body.bodea-theme main .bodea-software .cards .cards-card-body h2{
+  width:100%
+}
+
+
 body.bodea-theme main .article-card .cards .cards-card-body p {
     font-weight: 200;
     font-size: 11px;
@@ -764,7 +769,7 @@ body.bodea-theme footer .columns-row > div:first-child p:last-child {
     body.bodea-theme footer .columns-row > div:last-child {
         display: none;
     }
-    body.bodea-theme header .nav-wrapper nav {{
+    body.bodea-theme header .nav-wrapper nav {
       gap:3rem;
     }
 }
