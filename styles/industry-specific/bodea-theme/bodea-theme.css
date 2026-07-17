@@ -790,7 +790,7 @@ body.bodea-theme footer .columns-row > div:first-child p:last-child {
 
 @media screen and (max-width: 768px) {
     body.bodea-theme main .section.bodea-newsletter .newsletter-input-wrapper .newsletter-submit-button {
-        padding:2px 10px;
+        padding:2px 10px !important;
     }
 }
 
