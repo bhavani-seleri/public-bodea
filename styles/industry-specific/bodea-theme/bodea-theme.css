@@ -213,9 +213,9 @@ border-color: #fff;
 }
 
 body.bodea-theme main .bodea-banner .button-container.cta-button a.button:hover,
-body.bodea-theme main .bodea-greybx .button-container .button:hover,
+body.bodea-theme main .bodea-greybx .button-container .button:hover
 {
-    background: var(--link-hover-color) !important;
+    background: var(--main-accent-color) !important;
     border-color: var(--link-hover-color) !important;
     box-shadow: none !important;
     transform: none;
