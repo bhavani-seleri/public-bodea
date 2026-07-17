@@ -649,6 +649,13 @@ body.bodea-theme header .sign-in-btn {
     font-size: 14px;
     font-weight: 700;
     text-decoration: none;
+    background-color: #fff;
+    transition: filter .3s ease-in-out;
+
+}
+
+body.bodea-theme header .sign-in-btn:hover{
+    filter: brightness(90%);
 }
 body.bodea-theme header nav a::after{
     display: block;
