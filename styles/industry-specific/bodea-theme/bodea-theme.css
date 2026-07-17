@@ -568,7 +568,6 @@ body.bodea-theme main .bodea-consultant .cards ul > li {
 body.bodea-theme .header-wrapper {
     display: flex;
     width: 100%;
-    overflow: hidden;
     color: var(--nav-text-color);
     transition: top .3s;
     height:auto;
