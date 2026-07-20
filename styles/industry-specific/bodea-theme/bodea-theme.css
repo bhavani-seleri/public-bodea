@@ -346,6 +346,7 @@ body.bodea-theme main .article-card .cards .cards-card-body h2 {
     font-weight: 400;
     font-size: 14px !important;
     line-height: 1.5em;
+    text-transform: uppercase;
 }
 
 body.bodea-theme main .bodea-software .cards .cards-card-body h2{
@@ -792,6 +793,10 @@ body.bodea-theme footer .columns-row > div:first-child p:last-child {
     body.bodea-theme main .section.bodea-newsletter .newsletter-input-wrapper .newsletter-submit-button {
         padding:2px 10px !important;
     }
+}
+
+body.bodea-theme main .section.about-us-banner .hero img{
+  object-position: center top !important;
 }
 
 /* software */
