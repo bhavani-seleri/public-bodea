@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="170" viewBox="0 0 100 170">
+  <defs>
+    <clipPath id="clip-ribbon-todo_1">
+      <rect width="100" height="170"/>
+    </clipPath>
+  </defs>
+  <g id="ribbon-todo_1" data-name="ribbon-todo – 1" clip-path="url(#clip-ribbon-todo_1)">
+    <g id="Decorative_icon" data-name="Decorative icon" transform="translate(-21.621 41.352)">
+      <path id="Path_124531" data-name="Path 124531" d="M36.7,77.748l30.472,29.546c1.011,1,1.823.63,1.823-.794V-25.849A3.2,3.2,0,0,0,65.75-29H7.289a3.2,3.2,0,0,0-3.25,3.151L4,106.6c0,1.44.852,1.821,1.9.885Z" transform="translate(37.121 10.864)" fill="#202020" opacity="0.1"/>
+      <path id="Path_124530" data-name="Path 124530" d="M36.7,77.748l30.472,29.546c1.011,1,1.823.63,1.823-.794V-25.849A3.2,3.2,0,0,0,65.75-29H7.289a3.2,3.2,0,0,0-3.25,3.151L4,106.6c0,1.44.852,1.821,1.9.885Z" transform="translate(33.121 5.864)" fill="#2b8e77"/>
+    </g>
+    <text id="_1" data-name="1" transform="translate(46.315 93)" fill="#fff" font-size="56" font-family="OpenSans-Bold, Open Sans" font-weight="700" letter-spacing="-0.1em"><tspan x="-15.982" y="0">1</tspan></text>
+  </g>
+</svg>
