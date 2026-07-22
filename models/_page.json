@@ -114,6 +114,10 @@
           {
             "name": "Bodea Theme",
             "value": "bodea-theme"
+          },
+          {
+            "name": "Expnews Theme",
+            "value": "expnews-theme"
           }
         ]
       },
