@@ -89,3 +89,20 @@ indices:
       - /ja/search
       - /ja/footer
     target: /ja/query-index.json
+    
+  forms:
+    include:
+    - '/en/forms/**'
+    target: /query-index-forms.json
+    properties:
+      title:
+        select: head > meta[property="og:title"]
+        value: attribute(el, "content")
+      description:
+        select: head > meta[name="description"]
+        value: attribute(el, "content")
+      path:
+        select: head > meta[property="og:url"]
+        value: |
+          const url = new URL(attribute(el, "content"));
+          return url.pathname;
